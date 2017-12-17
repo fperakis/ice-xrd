@@ -7,14 +7,16 @@ def calculate_gr(xyz,nbins,bin_width,density,radius):
     In the calculation are included the molecules within a given radius.
     '''
 
-    n_oxygens = xyz.shape[0]
-    histogram = np.zeros(nbins)
-    shell = np.zeros(nbins)
-    distance = calculate_distance_from_center(xyz)
+    n_all       = xyz.shape[0]
+    histogram   = np.zeros(nbins)
+    shell       = np.zeros(nbins)
+    distance    = calculate_distance_from_center(xyz)
+    n_molecules  = 0
 
-    for i in range(0,n_oxygens-1):
+    for i in range(0,n_all-1):
         if distance[i]<radius:
-           for j in range(i+1,n_oxygens):
+            n_molecules += 1
+            for j in range(i+1,n_all):
                 dist = np.linalg.norm(xyz[j]-xyz[i])
                 index = int(round(dist/bin_width))
                 if index<nbins:
@@ -23,8 +25,8 @@ def calculate_gr(xyz,nbins,bin_width,density,radius):
     for i in range(nbins):
         shell[i] = 4.0*np.pi*(np.power((i+1)*bin_width,3)-np.power(i*bin_width,3))/3.0
 
-    #r  = np.arange(0,nbins*bin_width,bin_width) 
-    gr = histogram/n_oxygens/shell/density
+    print n_molecules
+    gr = histogram/n_molecules/shell/density
     return gr
 
 def calculate_distance_from_center(xyz):
