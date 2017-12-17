@@ -25,7 +25,6 @@ def calculate_gr(xyz,nbins,bin_width,density,radius):
     for i in range(nbins):
         shell[i] = 4.0*np.pi*(np.power((i+1)*bin_width,3)-np.power(i*bin_width,3))/3.0
 
-    print n_molecules
     gr = histogram/n_molecules/shell/density
     return gr
 
