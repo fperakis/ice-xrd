@@ -31,7 +31,24 @@ def iceXII_parameters():
 
     return file_name, density, dx, dy, dz
 
-def iceIV_parameters():
+def iceIX_parameters():
+    # http://www1.lsbu.ac.uk/water/ice_ix.html
+    file_name = 'ice3'
+    density_IX = 1.16
+    density = density_IX*10**(-24)/((2*1.0079+15.999)/(6.022*10**23))
+
+    dOOa = 6.692
+    dOOc = 6.715
+    n = 4
+    dx = n*dOOa
+    dy = n*dOOa
+    dz = n*dOOc
+
+    return file_name, density, dx, dy, dz
+
+
+def iceIV_parameters():    
+    # This is not working yet! Must displace by 70.1 degrees instead
     # taken from http://www1.lsbu.ac.uk/water/ice_iv.html
     file_name = 'ice4'
     density_IV = 1.272
